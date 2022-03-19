@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:easy_localization/src/public_ext.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterecom/cubit/auth/auth_cubit.dart';
@@ -19,7 +18,8 @@ class UserAddressScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         actions: [
-          ElevatedButton( //I:\DexkTop Old lap\5amsat\flutter_ecom
+          ElevatedButton(
+              //I:\DexkTop Old lap\5amsat\flutter_ecom
               style: ElevatedButton.styleFrom(
                 primary: Colors.transparent,
                 onPrimary: Colors.transparent,
@@ -29,7 +29,8 @@ class UserAddressScreen extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 6.0),
               ),
               onPressed: () {
-                UserAddressCubit.get(context).navigateToPlacePicker(context: context);
+                UserAddressCubit.get(context)
+                    .navigateToPlacePicker(context: context);
               },
               child: Row(
                 children: const [
@@ -60,15 +61,25 @@ class UserAddressScreen extends StatelessWidget {
       ),
       body: BlocConsumer<UserAddressCubit, UserAddressState>(
         listener: (context, state) {
-          if(state is PickedPlaceSuccess){
+          if (state is PickedPlaceSuccess) {
             Navigator.pop(context);
-            UserAddressCubit.get(context).showAddNewUserAddressDialog(lat: state.lat,lng: state.lng,formattedAddress: state.formattedAddress,context: context);
+            UserAddressCubit.get(context).showAddNewUserAddressDialog(
+                lat: state.lat,
+                lng: state.lng,
+                formattedAddress: state.formattedAddress,
+                context: context);
           }
-          if(state is UpdateAddressTextSuccessState){
-            showToast(msg: 'AddedSuccessfully', state: ToastedStates.SUCCESS,);
+          if (state is UpdateAddressTextSuccessState) {
+            showToast(
+              msg: 'AddedSuccessfully',
+              state: ToastedStates.SUCCESS,
+            );
           }
-          if(state is UpdateAddressTextFailedState){
-            showToast(msg: state.error, state: ToastedStates.SUCCESS,);
+          if (state is UpdateAddressTextFailedState) {
+            showToast(
+              msg: state.error,
+              state: ToastedStates.SUCCESS,
+            );
           }
         },
         builder: (context, state) {
@@ -120,7 +131,9 @@ class UserAddressScreen extends StatelessWidget {
                 const SizedBox(
                   height: 15.0,
                 ),
-                state is UpdateAddressLocLoadingState ? defaultLinearProgressIndicator() : Container(),
+                state is UpdateAddressLocLoadingState
+                    ? defaultLinearProgressIndicator()
+                    : Container(),
                 Expanded(
                   child: ListView.separated(
                     physics: const BouncingScrollPhysics(),

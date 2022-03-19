@@ -1,8 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterecom/cubit/product_details/product_details_cubit.dart';
-import 'package:flutterecom/cubit/product_details/product_details_state.dart';
 import 'package:flutterecom/shared/style/colors.dart';
 
 class RadioItemTile extends StatelessWidget {

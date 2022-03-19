@@ -1,10 +1,8 @@
 import 'dart:io';
 
-import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutterecom/cubit/auth/auth_cubit.dart';
 import 'package:flutterecom/cubit/home_layout/home_layout_cubit.dart';
 import 'package:flutterecom/cubit/product_details/product_details_state.dart';
 import 'package:flutterecom/data/api/reviews_api.dart';
@@ -15,7 +13,6 @@ import 'package:flutterecom/data/models/product_size_model.dart';
 import 'package:flutterecom/data/repo/reviews_repo.dart';
 import 'package:flutterecom/shared/constants/constants.dart';
 import 'package:http/http.dart' as http;
-import 'package:http/http.dart';
 import 'package:path_provider/path_provider.dart';
 
 class ProductDetailsCubit extends Cubit<ProductDetailsStates> {
@@ -101,7 +98,7 @@ class ProductDetailsCubit extends Cubit<ProductDetailsStates> {
       }) {
     emit(SubmitUserProductRateLoadingState());
 
-    print('UserName: ${userName}, UserId: ${userId}, CatId: ${catMenuId}');
+    print('UserName: $userName, UserId: $userId, CatId: $catMenuId');
 
     ProductRateModel productRateModel = ProductRateModel(
         name: userName,

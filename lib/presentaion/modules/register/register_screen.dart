@@ -1,6 +1,5 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
-import 'package:easy_localization/src/public_ext.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterecom/cubit/auth/auth_cubit.dart';
@@ -14,15 +13,25 @@ import 'package:flutterecom/shared/style/colors.dart';
 import 'package:flutterecom/shared/style/icon_broken.dart';
 import 'package:flutterecom/shared/validator.dart';
 
-class RegisterScreen extends StatelessWidget {
-  var formKey = GlobalKey<FormState>();
-  var nameController = TextEditingController();
-  var emailController = TextEditingController();
-  var passController = TextEditingController();
-  var phoneController = TextEditingController();
-  var addressController = TextEditingController();
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({Key? key}) : super(key: key);
 
-  RegisterScreen({Key? key}) : super(key: key);
+  @override
+  State<RegisterScreen> createState() => _RegisterScreenState();
+}
+
+class _RegisterScreenState extends State<RegisterScreen> {
+  var formKey = GlobalKey<FormState>();
+
+  var nameController = TextEditingController();
+
+  var emailController = TextEditingController();
+
+  var passController = TextEditingController();
+
+  var phoneController = TextEditingController();
+
+  var addressController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -30,21 +39,20 @@ class RegisterScreen extends StatelessWidget {
     phoneController.text = cubit.phoneLoginPhoneNum;
     emailController.text = cubit.googleLLoginEmail;
 
-    print('email: ${cubit.googleLLoginEmail} phone: ${cubit.phoneLoginPhoneNum}');
+    print(
+        'email: ${cubit.googleLLoginEmail} phone: ${cubit.phoneLoginPhoneNum}');
 
     return BlocConsumer<AuthCubit, AuthStates>(
       listener: (context, state) {
         if (state is CreateUserSuccessState) {
-
           CacheHelper.saveData(
             key: 'uId',
             value: state.userModel.uId,
           ).then((value) {
             AuthCubit.get(context).userModel = state.userModel;
             Navigator.pushNamedAndRemoveUntil(
-              context, homeLayoutPath, (route) => false);
+                context, homeLayoutPath, (route) => false);
           });
-
         }
         if (state is CreateUserFailedState) {
           showToast(msg: 'error_wrong'.tr(), state: ToastedStates.ERROR);
@@ -139,12 +147,14 @@ class RegisterScreen extends StatelessWidget {
                             ? 'enter_email'.tr()
                             : 'enter_email_optional'.tr(),
                         prefixIcon: Iconly_Broken.Message,
-                        isClickable: cubit.googleLLoginEmail == '' ? true : false,
+                        isClickable:
+                            cubit.googleLLoginEmail == '' ? true : false,
                       ),
                       const SizedBox(
                         height: 15.0,
                       ),
-                      (cubit.phoneLoginPhoneNum == '' && cubit.googleLLoginEmail == '')
+                      (cubit.phoneLoginPhoneNum == '' &&
+                              cubit.googleLLoginEmail == '')
                           ? DefaultFormField(
                               controller: passController,
                               textInputType: TextInputType.visiblePassword,
@@ -164,10 +174,11 @@ class RegisterScreen extends StatelessWidget {
                       ConditionalBuilder(
                         condition: state is! RegisterLoadingState,
                         builder: (BuildContext context) => DefaultButtonView(
-                          background: defaultColor,
+                            background: defaultColor,
                             function: () {
                               if (formKey.currentState!.validate()) {
-                                if (cubit.phoneLoginPhoneNum == '' && cubit.googleLLoginEmail == '') {
+                                if (cubit.phoneLoginPhoneNum == '' &&
+                                    cubit.googleLLoginEmail == '') {
                                   //normalRegister
                                   AuthCubit.get(context).userRegister(
                                     email: emailController.text,

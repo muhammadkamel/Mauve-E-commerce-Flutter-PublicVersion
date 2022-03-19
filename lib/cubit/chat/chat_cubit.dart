@@ -1,6 +1,4 @@
-import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/src/widgets/editable_text.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterecom/data/models/chat_info_model.dart';
 import 'package:flutterecom/data/models/chat_msg_model.dart';
@@ -29,10 +27,9 @@ class ChatCubit extends Cubit<ChatState>{
     {
       messages=[];
 
-      event.docs.forEach((element)
-      {
+      for (var element in event.docs) {
         messages!.add(ChatMsgModel.fromJson(element.data()));
-      });
+      }
       emit(ChatGetMessageSuccessState());
     });
   }

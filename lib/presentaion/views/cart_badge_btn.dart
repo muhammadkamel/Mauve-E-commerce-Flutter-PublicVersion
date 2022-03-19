@@ -1,9 +1,5 @@
 import 'package:badges/badges.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutterecom/cubit/cart/cart_cubit.dart';
-import 'package:flutterecom/cubit/cart/cart_state.dart';
 import 'package:flutterecom/shared/constants/constants.dart';
 import 'package:flutterecom/shared/network/local/hive/employee.dart';
 import 'package:flutterecom/shared/style/colors.dart';

@@ -1,11 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterecom/cubit/home_layout/home_layout_cubit.dart';
 import 'package:flutterecom/data/models/category_model.dart';
 import 'package:flutterecom/shared/style/colors.dart';
-import 'package:shimmer/shimmer.dart';
 
 class CategoryGridItem extends StatelessWidget {
   final CategoriesModel categoriesItem;

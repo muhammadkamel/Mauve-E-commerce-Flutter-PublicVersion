@@ -15,12 +15,12 @@ class ProductsApi {
       .collection(PRODUCTS_COLLECTION)
       .get()
       .then((value) {
-    value.docs.forEach((element) {
+    for (var element in value.docs) {
       var productModel = ProductModel.fromJson(element.data());
       productModel.id = element.id;
       productModel.reference = element.reference;
       productList.add(productModel);
-    });
+    }
     return productList;
   }).catchError((onError) {
     throw (onError.toString()); // error thrown

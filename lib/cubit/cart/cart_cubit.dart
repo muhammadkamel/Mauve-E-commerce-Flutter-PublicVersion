@@ -1,8 +1,5 @@
-import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutterecom/data/models/product_model.dart';
-import 'package:flutterecom/presentaion/modules/cart/cart_screen.dart';
 import 'package:flutterecom/shared/commponents/commopnents.dart';
 import 'package:flutterecom/shared/constants/constants.dart';
 import 'package:flutterecom/shared/network/local/hive/employee.dart';

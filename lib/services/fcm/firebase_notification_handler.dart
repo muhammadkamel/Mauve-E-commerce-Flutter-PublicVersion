@@ -10,7 +10,6 @@ import 'package:path_provider/path_provider.dart';
 
 import 'notification_handler.dart';
 import 'package:http/http.dart' as http;
-import 'package:http/http.dart';
 
 class FirebaseNotifications{
   late FirebaseMessaging _messaging;
@@ -66,10 +65,11 @@ class FirebaseNotifications{
       print('Receive $remoteMessage');
       if(Platform.isAndroid)
         {
-          if(remoteMessage.data['IMAGE_URL'] !=null)
+          if(remoteMessage.data['IMAGE_URL'] !=null) {
             showNotificationBigStyle(remoteMessage.data['title'],remoteMessage.data['body'],remoteMessage.data['IMAGE_URL']);
-          else
+          } else {
             showNotification(remoteMessage.data['title'],remoteMessage.data['body']);
+          }
         }
 
       else if(Platform.isIOS)
@@ -90,7 +90,7 @@ class FirebaseNotifications{
           actions: [
             CupertinoDialogAction(
               isDefaultAction: true,
-              child: Text('OK'),
+              child: const Text('OK'),
               onPressed: ()=> Navigator.of(context,rootNavigator: true,).pop(),
             )
           ],));
@@ -132,7 +132,7 @@ class FirebaseNotifications{
     if(image.toString().contains('http'))
       {
      bigPicturePath = await _downloadAndSaveFile(
-            '${image}', 'bigPicture');
+            '$image', 'bigPicture');
 
      print('forGrawondImsg');
       }

@@ -1,17 +1,9 @@
 import 'dart:io';
 
-import 'package:bloc/bloc.dart';
 import 'package:connectivity/connectivity.dart';
-import 'package:easy_localization/src/public_ext.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterecom/cubit/check_connection/check_connection_state.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
-import 'package:flutterecom/presentaion/views/elevated_btn.dart';
-import 'package:flutterecom/shared/commponents/commopnents.dart';
-import 'package:flutterecom/shared/constants/constants.dart';
-import 'package:one_context/one_context.dart';
 
 class CheckConnectionCubit extends Cubit<CheckConnectionStates> {
   CheckConnectionCubit(): super (CheckConnectionLoading());

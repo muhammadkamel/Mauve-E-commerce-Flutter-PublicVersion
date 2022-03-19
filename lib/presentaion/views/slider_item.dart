@@ -1,9 +1,7 @@
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterecom/cubit/home_layout/home_layout_cubit.dart';
-import 'package:flutterecom/presentaion/layouts/home_layout.dart';
 import 'package:flutterecom/presentaion/modules/home/home_screen.dart';
 import 'package:flutterecom/shared/style/colors.dart';
 import 'package:easy_localization/easy_localization.dart';

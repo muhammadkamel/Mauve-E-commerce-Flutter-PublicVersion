@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutterecom/data/models/product_rate_model.dart';
@@ -6,7 +5,7 @@ import 'package:flutterecom/shared/style/colors.dart';
 
 class ReviewGridItem extends StatelessWidget {
   final ProductRateModel productRateItem;
-  ReviewGridItem({Key? key, required this.productRateItem}) : super(key: key);
+  const ReviewGridItem({Key? key, required this.productRateItem}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

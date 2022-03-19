@@ -1,6 +1,5 @@
 import 'dart:core';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterecom/shared/style/colors.dart';
 
@@ -43,6 +42,6 @@ class DefaultButtonView extends StatelessWidget {
           radius,
         ),
       ),
-    );;
+    );
   }
 }

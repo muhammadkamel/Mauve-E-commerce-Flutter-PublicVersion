@@ -1,6 +1,5 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
-import 'package:easy_localization/src/public_ext.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterecom/cubit/auth/auth_cubit.dart';
@@ -27,32 +26,30 @@ class LoginScreen extends StatelessWidget {
   final phoneAuthController = TextEditingController();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
-
   @override
   Widget build(BuildContext context) {
-    var cubit= AuthCubit.get(context);
+    var cubit = AuthCubit.get(context);
 
     return BlocConsumer<AuthCubit, AuthStates>(
       listener: (context, state) {
         if (state is LoginFailedState) {
           showToast(msg: 'error_wrong'.tr(), state: ToastedStates.ERROR);
         }
-        if(state is ShopLoginPhoneCodeSuccessSend){
-          Navigator.pushNamed(context, otpPath,arguments: state.phone);
+        if (state is ShopLoginPhoneCodeSuccessSend) {
+          Navigator.pushNamed(context, otpPath, arguments: state.phone);
         }
         if (state is LoginSuccessState) {
-
           CacheHelper.saveData(
             key: 'uId',
             value: state.userModel.uId,
           ).then((value) {
             AuthCubit.get(context).userModel = state.userModel;
-            Navigator.pushNamedAndRemoveUntil(context,homeLayoutPath, (route) => false);
+            Navigator.pushNamedAndRemoveUntil(
+                context, homeLayoutPath, (route) => false);
           });
-
-
         }
-        if(state is LoginSuccessStateButNeedRegister){ //googleRegister
+        if (state is LoginSuccessStateButNeedRegister) {
+          //googleRegister
           Navigator.pushNamedAndRemoveUntil(
               context, registerPath, (route) => false);
         }
@@ -77,7 +74,7 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
             ],
-            backgroundColor:  MyColors.scaffoldBackgroundColorMain,
+            backgroundColor: MyColors.scaffoldBackgroundColorMain,
             elevation: 0,
           ),
           body: SingleChildScrollView(
@@ -85,13 +82,15 @@ class LoginScreen extends StatelessWidget {
             child: Column(
               children: [
                 Container(
-                    color:  MyColors.scaffoldBackgroundColorMain,
+                    color: MyColors.scaffoldBackgroundColorMain,
                     child: Image.asset(
                       'assets/images/logoo.png',
                       height: 200.0,
                       fit: BoxFit.cover,
                     )),
-                const SizedBox(height: 25.0,),
+                const SizedBox(
+                  height: 25.0,
+                ),
                 Container(
                   padding: const EdgeInsets.all(14.0),
                   decoration: const BoxDecoration(
@@ -119,17 +118,21 @@ class LoginScreen extends StatelessWidget {
                             ),
                             InkWell(
                                 onTap: () {
-                                 Navigator.pushNamedAndRemoveUntil(
-                                     context, homeLayoutPath, (route) => false,);
+                                  Navigator.pushNamedAndRemoveUntil(
+                                    context,
+                                    homeLayoutPath,
+                                    (route) => false,
+                                  );
                                 },
                                 child: Text(
                                   'Skip'.tr(),
-                                  style:
-                                      const TextStyle(color: defaultColor),
+                                  style: const TextStyle(color: defaultColor),
                                 )),
                           ],
                         ),
-                       state is GoogleSingUpLoading ?  defaultLinearProgressIndicator(): Container(),
+                        state is GoogleSingUpLoading
+                            ? defaultLinearProgressIndicator()
+                            : Container(),
                         const SizedBox(
                           height: 15.0,
                         ),
@@ -180,8 +183,8 @@ class LoginScreen extends StatelessWidget {
                               isUpperCase: true,
                               background: defaultColor,
                               radius: 5.0),
-                          fallback: (BuildContext context) => const Center(
-                              child: CircularProgressIndicator()),
+                          fallback: (BuildContext context) =>
+                              const Center(child: CircularProgressIndicator()),
                         ),
                         const SizedBox(
                           height: 10.0,
@@ -194,14 +197,19 @@ class LoginScreen extends StatelessWidget {
                                 textStyle: const TextStyle(fontSize: 15.0),
                                 text: 'register'.tr(),
                                 function: () {
-                                  Navigator.pushNamed(context, registerPath,arguments: '');
+                                  Navigator.pushNamed(context, registerPath,
+                                      arguments: '');
                                 }),
                           ],
                         ),
                         const SizedBox(
                           height: 10.0,
                         ),
-                        Align(child: Text(' ـــــــــــــــ${'or_ling_by'.tr()}ـــــــــــــــ '),alignment: Alignment.center,),
+                        Align(
+                          child: Text(
+                              ' ـــــــــــــــ${'or_ling_by'.tr()}ـــــــــــــــ '),
+                          alignment: Alignment.center,
+                        ),
                         const SizedBox(
                           height: 10.0,
                         ),
@@ -209,21 +217,25 @@ class LoginScreen extends StatelessWidget {
                           children: [
                             Expanded(
                               child: ElevatedButtonIconView(
-                                elevation: 0.5,
-                                bgColor: Colors.white,
-                                  textColor: Colors.black,
-                                  icon: const Icon(Iconly_Broken.Call,color: defaultColor,),
-                                  text: 'sing_in_by_phone'.tr(),
-                                  function: () => showBottomSheetForReviews(scaffoldKey,context,cubit)
-                              ),
-                            ),
-                            Expanded(
-                              child: ElevatedButtonIconView(
                                   elevation: 0.5,
                                   bgColor: Colors.white,
                                   textColor: Colors.black,
-                                  text: 'google_sing_in'.tr(),
-                                  function: () => _loginGoogle(context,cubit), icon: googleIcon,
+                                  icon: const Icon(
+                                    Iconly_Broken.Call,
+                                    color: defaultColor,
+                                  ),
+                                  text: 'sing_in_by_phone'.tr(),
+                                  function: () => showBottomSheetForReviews(
+                                      scaffoldKey, context, cubit)),
+                            ),
+                            Expanded(
+                              child: ElevatedButtonIconView(
+                                elevation: 0.5,
+                                bgColor: Colors.white,
+                                textColor: Colors.black,
+                                text: 'google_sing_in'.tr(),
+                                function: () => _loginGoogle(context, cubit),
+                                icon: googleIcon,
                               ),
                             ),
                           ],
@@ -240,15 +252,17 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  void showBottomSheetForReviews(GlobalKey<ScaffoldState> scaffoldKey,context,AuthCubit cubit) {
-
+  void showBottomSheetForReviews(
+      GlobalKey<ScaffoldState> scaffoldKey, context, AuthCubit cubit) {
     scaffoldKey.currentState!.showBottomSheet((context) {
       return Container(
         padding: const EdgeInsets.all(8.0),
         height: MediaQuery.of(context).size.height / 1.9,
-        decoration: BoxDecoration(color: const Color(0x00737373), borderRadius: BorderRadius.circular(20)),
+        decoration: BoxDecoration(
+            color: const Color(0x00737373),
+            borderRadius: BorderRadius.circular(20)),
         child: Container(
-          decoration:  const BoxDecoration(
+          decoration: const BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(15.0),
@@ -267,7 +281,6 @@ class LoginScreen extends StatelessWidget {
                       color: Colors.grey,
                     ),
                   ),
-
                   const SizedBox(
                     height: 12.0,
                   ),
@@ -284,13 +297,15 @@ class LoginScreen extends StatelessWidget {
                     label: 'enter_txt'.tr(),
                     prefixIcon: Iconly_Broken.Call,
                   ),
-                  const SizedBox(height: 15.0,),
-                  BlocBuilder<AuthCubit,AuthStates>(
-                    builder: (context,state){
+                  const SizedBox(
+                    height: 15.0,
+                  ),
+                  BlocBuilder<AuthCubit, AuthStates>(
+                    builder: (context, state) {
                       return ConditionalBuilder(
                         condition: state is! ShopLoginPhoneAuthLoading,
                         builder: (BuildContext context) {
-                          return  Padding(
+                          return Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: DefaultButtonView(
                               radius: 10.0,
@@ -299,14 +314,17 @@ class LoginScreen extends StatelessWidget {
                               function: () {
                                 if (phoneAuthFormKey.currentState!.validate()) {
                                   print('LoginPressed ${'enter_sms'.tr()}');
-                                  cubit.phoneAuth('+2${phoneAuthController.text}',context,'enter_sms'.tr());
+                                  cubit.phoneAuth(
+                                      '+2${phoneAuthController.text}',
+                                      context,
+                                      'enter_sms'.tr());
                                 }
                               },
                             ),
                           );
                         },
-                        fallback:(context)=> const CircularProgressIndicator(),
-
+                        fallback: (context) =>
+                            const CircularProgressIndicator(),
                       );
                     },
                   ),
@@ -319,8 +337,7 @@ class LoginScreen extends StatelessWidget {
     });
   }
 
-  _loginGoogle(context,cubit) {
+  _loginGoogle(context, cubit) {
     cubit.signInByGoogle();
   }
-
 }

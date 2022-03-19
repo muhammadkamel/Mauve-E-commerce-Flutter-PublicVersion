@@ -1,14 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterecom/data/models/boarding_model.dart';
 import 'package:flutterecom/presentaion/views/boarder_item.dart';
 import 'package:flutterecom/presentaion/views/default_txt_btn.dart';
-import 'package:flutterecom/shared/commponents/commopnents.dart';
 import 'package:flutterecom/shared/constants/constants.dart';
 import 'package:flutterecom/shared/images/images_svg.dart';
 import 'package:flutterecom/shared/network/local/cache_helper.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutterecom/shared/route/routes.dart';
 import 'package:flutterecom/shared/style/colors.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -118,7 +115,7 @@ class _OnboardScreenState extends State<OnboardScreen> {
                         );
                       }
                     },
-                    child:isLast? Text('Start'.tr(),style: TextStyle(color: Colors.white),) : const Icon(Icons.arrow_forward_ios,color: Colors.white,),
+                    child:isLast? Text('Start'.tr(),style: const TextStyle(color: Colors.white),) : const Icon(Icons.arrow_forward_ios,color: Colors.white,),
                   ),
                 ],
               )

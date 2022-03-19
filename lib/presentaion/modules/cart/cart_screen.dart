@@ -1,11 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:easy_localization/src/public_ext.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:faker/faker.dart';
-import 'package:flutter/painting.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutterecom/cubit/cart/cart_cubit.dart';
 import 'package:flutterecom/cubit/cart/cart_state.dart';
 import 'package:flutterecom/presentaion/views/cart_item.dart';
@@ -14,19 +9,16 @@ import 'package:flutterecom/shared/constants/constants.dart';
 import 'package:flutterecom/shared/network/local/hive/employee.dart';
 import 'package:flutterecom/shared/style/colors.dart';
 import 'package:flutterecom/shared/style/icon_broken.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-
-class CartScreen extends StatelessWidget{
+class CartScreen extends StatelessWidget {
   const CartScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<CartCubit,CartStates>(
-      listener: (context,state){
-        if(state is AddToCartErrorState){
-        }
+    return BlocConsumer<CartCubit, CartStates>(
+      listener: (context, state) {
+        if (state is AddToCartErrorState) {}
       },
       builder: (BuildContext context, state) {
         return Scaffold(
@@ -52,10 +44,11 @@ class CartScreen extends StatelessWidget{
           ),
           body: ValueListenableBuilder(
             valueListenable: Boxes.getEmployees().listenable(),
-            builder: (context,Box box, _) {
+            builder: (context, Box box, _) {
               final cartItems = box.values.toList().cast<Employee>();
-              if(cartItems.isEmpty){
-                Future.delayed(const Duration(milliseconds: 50), () { //0.5 sec
+              if (cartItems.isEmpty) {
+                Future.delayed(const Duration(milliseconds: 50), () {
+                  //0.5 sec
                   Navigator.pop(context);
                 });
               }
@@ -71,7 +64,9 @@ class CartScreen extends StatelessWidget{
                         itemBuilder: (context, index) {
                           return CartItem(cartItem: cartItems[index]);
                         },
-                        separatorBuilder: (context,index) => const SizedBox(height: 10.0,),
+                        separatorBuilder: (context, index) => const SizedBox(
+                          height: 10.0,
+                        ),
                       ),
                     ),
                     Container(
@@ -83,18 +78,34 @@ class CartScreen extends StatelessWidget{
                       child: Column(
                         children: [
                           Row(
-                            children:  [
-                              const  Text('Total'),
+                            children: [
+                              const Text('Total'),
                               const Spacer(),
-                              cartItems.isNotEmpty ?  Text(cartItems.map((e) => e.price.toDouble() * e.quantity.toDouble()).reduce((value, element) => value + element).toStringAsFixed(2)+' EGP',style: const TextStyle(color: defaultColor),) : Container(),
+                              cartItems.isNotEmpty
+                                  ? Text(
+                                      cartItems
+                                              .map((e) =>
+                                                  e.price.toDouble() *
+                                                  e.quantity.toDouble())
+                                              .reduce((value, element) =>
+                                                  value + element)
+                                              .toStringAsFixed(2) +
+                                          ' EGP',
+                                      style:
+                                          const TextStyle(color: defaultColor),
+                                    )
+                                  : Container(),
                             ],
                           ),
-                          const SizedBox(height: 20.0,),
+                          const SizedBox(
+                            height: 20.0,
+                          ),
                           DefaultButtonView(
-                              function: (){},
+                            function: () {},
                             background: defaultColor,
-                              text: 'Checkout',
-                          radius: 12.0,)
+                            text: 'Checkout',
+                            radius: 12.0,
+                          )
                         ],
                       ),
                     ),
@@ -107,7 +118,4 @@ class CartScreen extends StatelessWidget{
       },
     );
   }
-
 }
-
-

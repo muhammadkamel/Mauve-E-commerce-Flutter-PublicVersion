@@ -1,7 +1,5 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
-import 'package:easy_localization/src/public_ext.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterecom/cubit/auth/auth_cubit.dart';
@@ -13,12 +11,12 @@ import 'package:flutterecom/shared/commponents/commopnents.dart';
 import 'package:flutterecom/shared/style/colors.dart';
 import 'package:flutterecom/shared/style/icon_broken.dart';
 import 'package:flutterecom/shared/validator.dart';
-import 'package:image_picker/image_picker.dart';
 
 class UpdateAccountInfo extends StatefulWidget {
   final UserModel userModel;
 
-  UpdateAccountInfo({Key? key, required this.userModel}) : super(key: key);
+  const UpdateAccountInfo({Key? key, required this.userModel})
+      : super(key: key);
 
   @override
   State<UpdateAccountInfo> createState() => _UpdateAccountInfoState();
@@ -35,24 +33,25 @@ class _UpdateAccountInfoState extends State<UpdateAccountInfo> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     nameController.text = AuthCubit.get(context).userModel.name;
     emailController.text = AuthCubit.get(context).userModel.email;
     phoneController.text = AuthCubit.get(context).userModel.phone;
   }
+
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AuthCubit,AuthStates>(
+    return BlocConsumer<AuthCubit, AuthStates>(
       listener: (BuildContext context, state) {
-        if(state is UserInfoUpdateSuccess || state is UploadProfileInFirebaseSuccessState){
+        if (state is UserInfoUpdateSuccess ||
+            state is UploadProfileInFirebaseSuccessState) {
           Navigator.pop(context);
         }
-        if(state is ProfileImagePickedSuccessState){
+        if (state is ProfileImagePickedSuccessState) {
           AuthCubit.get(context).uploadProfileImage();
         }
       },
-      builder: (context,state){
+      builder: (context, state) {
         return SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: Padding(
@@ -62,16 +61,18 @@ class _UpdateAccountInfoState extends State<UpdateAccountInfo> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  state is UserImageUpdateLoadingState ? defaultLinearProgressIndicator() : Container(),
+                  state is UserImageUpdateLoadingState
+                      ? defaultLinearProgressIndicator()
+                      : Container(),
                   CircleAvatar(
                     radius: 60.0,
                     backgroundColor: Colors.white,
                     child: CircleAvatar(
                       backgroundColor: Colors.white,
-                      child:  Align(
+                      child: Align(
                         alignment: Alignment.bottomRight,
                         child: InkWell(
-                          onTap: (){
+                          onTap: () {
                             AuthCubit.get(context).pickProfileImage();
                           },
                           child: const CircleAvatar(
@@ -86,9 +87,13 @@ class _UpdateAccountInfoState extends State<UpdateAccountInfo> {
                         ),
                       ),
                       radius: 55.0,
-                      backgroundImage: AuthCubit.get(context).profileImage == null ? NetworkImage(
-                        widget.userModel.image,
-                      ) : FileImage(AuthCubit.get(context).profileImage!)  as ImageProvider,
+                      backgroundImage:
+                          AuthCubit.get(context).profileImage == null
+                              ? NetworkImage(
+                                  widget.userModel.image,
+                                )
+                              : FileImage(AuthCubit.get(context).profileImage!)
+                                  as ImageProvider,
                       /*backgroundImage: widget.userModel.image!='' ? NetworkImage(
                         widget.userModel.image
                     ) : const NetworkImage(
@@ -131,24 +136,30 @@ class _UpdateAccountInfoState extends State<UpdateAccountInfo> {
                   const SizedBox(
                     height: 15.0,
                   ),
-                  BlocBuilder<AuthCubit,AuthStates>(
-                    builder: (context,state){
+                  BlocBuilder<AuthCubit, AuthStates>(
+                    builder: (context, state) {
                       return ConditionalBuilder(
                         condition: state is! UserInfoUpdateLoading,
                         builder: (BuildContext context) {
                           return Align(
                             alignment: Alignment.bottomRight,
-                            child: DefaultButtonView(function: (){
-                              if (formKey.currentState!.validate()){
-                                AuthCubit.get(context).updateUserData(name: nameController.text, phone: phoneController.text, email: emailController.text);
-                              }
-                            }, text: 'Update',
+                            child: DefaultButtonView(
+                              function: () {
+                                if (formKey.currentState!.validate()) {
+                                  AuthCubit.get(context).updateUserData(
+                                      name: nameController.text,
+                                      phone: phoneController.text,
+                                      email: emailController.text);
+                                }
+                              },
+                              text: 'Update',
                               radius: 15.0,
                               background: defaultColor,
                             ),
                           );
                         },
-                        fallback: (BuildContext context) => defaultLinearProgressIndicator(),
+                        fallback: (BuildContext context) =>
+                            defaultLinearProgressIndicator(),
                       );
                     },
                   )
@@ -158,18 +169,6 @@ class _UpdateAccountInfoState extends State<UpdateAccountInfo> {
           ),
         );
       },
-
-    );
-  }
-
-  Widget _loadingToUpdateImage() {
-    return BlocBuilder<AuthCubit,AuthStates>(
-        builder: (context,state){
-          if(state is UserImageUpdateLoadingState){
-            return defaultLinearProgressIndicator();
-          }
-          return Container();
-        }
     );
   }
 }

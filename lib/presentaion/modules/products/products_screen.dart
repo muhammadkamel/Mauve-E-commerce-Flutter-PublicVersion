@@ -1,14 +1,9 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
-import 'package:easy_localization/src/public_ext.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutterecom/cubit/home_layout/home_layout_cubit.dart';
 import 'package:flutterecom/cubit/home_layout/home_layout_state.dart';
 import 'package:flutterecom/data/models/category_model.dart';
-import 'package:flutterecom/data/models/product_model.dart';
-import 'package:flutterecom/presentaion/views/products_grid_item.dart';
 import 'package:flutterecom/presentaion/views/tab_view_page_item.dart';
 import 'package:flutterecom/shared/commponents/commopnents.dart';
 import 'package:flutterecom/shared/style/colors.dart';
@@ -26,7 +21,6 @@ class ProductsScreen extends StatefulWidget {
 class _ProductsScreenState extends State<ProductsScreen> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     HomeLayoutCubit.get(context)
         .getProductsByCategoryMenuId(categoriesItem: widget.categoriesItem);
@@ -99,5 +93,4 @@ class _ProductsScreenState extends State<ProductsScreen> {
       },
     );
   }
-
 }

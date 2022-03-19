@@ -1,15 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
-import 'package:easy_localization/src/public_ext.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutterecom/cubit/auth/auth_cubit.dart';
 import 'package:flutterecom/cubit/home_layout/home_layout_cubit.dart';
 import 'package:flutterecom/cubit/home_layout/home_layout_state.dart';
-import 'package:flutterecom/presentaion/layouts/home_layout.dart';
 import 'package:flutterecom/presentaion/views/add_to_cart_btn.dart';
 import 'package:flutterecom/presentaion/views/categoryies_grid_item.dart';
 import 'package:flutterecom/presentaion/views/slider_item.dart';
@@ -17,8 +13,7 @@ import 'package:flutterecom/shared/commponents/commopnents.dart';
 import 'package:flutterecom/shared/style/colors.dart';
 
 class HomeScreen extends StatefulWidget {
-
-   HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -28,7 +23,6 @@ class _HomeScreenState extends State<HomeScreen> {
   List<OfferMode> offers = [];
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     //Static UI, You Can make it dynamic with the same fetch data approach I use in this project.
@@ -45,9 +39,10 @@ class _HomeScreenState extends State<HomeScreen> {
         'https://firebasestorage.googleapis.com/v0/b/flutterecom-b7f81.appspot.com/o/newDesign%2Fslide3.jpg?alt=media&token=39a18686-2ed0-43ca-83f2-e889bdfff3b8',
         'All YOU NEED3'));
   }
+
   @override
   Widget build(BuildContext context) {
-   var cubit = HomeLayoutCubit.get(context);
+    var cubit = HomeLayoutCubit.get(context);
 
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
@@ -59,11 +54,11 @@ class _HomeScreenState extends State<HomeScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 const Text('Categories',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 15.0)),
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0)),
                 const Spacer(),
                 InkWell(
-                  onTap: (){
+                  onTap: () {
                     cubit.navigateToCategoryList();
                   },
                   child: const Text(
@@ -105,7 +100,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           width: 10.0,
                         ),
                         itemCount:
-                        HomeLayoutCubit.get(context).categoryList.length,
+                            HomeLayoutCubit.get(context).categoryList.length,
                       ),
                     );
                   },
@@ -148,14 +143,14 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
-              children:  [
+              children: [
                 const Text('Offers',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 15.0)),
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0)),
                 const Spacer(),
                 InkWell(
-                  onTap: (){
-                   // cubit.navigateToCategoryList();
+                  onTap: () {
+                    // cubit.navigateToCategoryList();
                   },
                   child: const Text(
                     'SeeAll',
@@ -188,7 +183,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           ClipRRect(
                             borderRadius: BorderRadius.circular(12.0),
                             child: CachedNetworkImage(
-                              imageUrl: 'https://firebasestorage.googleapis.com/v0/b/flutterecom-b7f81.appspot.com/o/newDesign%2F61tqeocT3ML._AC_SX679_.jpg?alt=media&token=d9265aeb-54b1-436a-bbc7-305fec602be6',
+                              imageUrl:
+                                  'https://firebasestorage.googleapis.com/v0/b/flutterecom-b7f81.appspot.com/o/newDesign%2F61tqeocT3ML._AC_SX679_.jpg?alt=media&token=d9265aeb-54b1-436a-bbc7-305fec602be6',
                               height: 100.0,
                               width: 100.0,
                             ),
@@ -198,12 +194,11 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           const Expanded(
                               child: Text(
-                                'ALFA Furnishing Ergonomic Desk Chair ALFA Furnishing Ergonomic Desk Chair',
-                                maxLines: 3,
-                                style: TextStyle(fontSize: 12.0),
-                                overflow: TextOverflow.ellipsis,
-                              )
-                          ),
+                            'ALFA Furnishing Ergonomic Desk Chair ALFA Furnishing Ergonomic Desk Chair',
+                            maxLines: 3,
+                            style: TextStyle(fontSize: 12.0),
+                            overflow: TextOverflow.ellipsis,
+                          )),
                         ],
                       ),
                       Column(
@@ -211,14 +206,22 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.end,
-                            children: const[
-                              Text("96.00 EGP",style: TextStyle(
-                                fontSize: 12.0,
-                                color: Colors.grey,
-                                decoration: TextDecoration.lineThrough,
-                              ),),
-                              SizedBox(width: 5.0,),
-                              Text("80.00 EGP",style: TextStyle(color: defaultColor),),
+                            children: const [
+                              Text(
+                                "96.00 EGP",
+                                style: TextStyle(
+                                  fontSize: 12.0,
+                                  color: Colors.grey,
+                                  decoration: TextDecoration.lineThrough,
+                                ),
+                              ),
+                              SizedBox(
+                                width: 5.0,
+                              ),
+                              Text(
+                                "80.00 EGP",
+                                style: TextStyle(color: defaultColor),
+                              ),
                             ],
                           ),
                           Container(
@@ -227,18 +230,23 @@ class _HomeScreenState extends State<HomeScreen> {
                                 color: defaultColor,
                                 width: 1.5,
                               ),
-                              borderRadius: const BorderRadius.all(
-                                  Radius.circular(10.0)
-                              ),
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(10.0)),
                             ),
                             child: const Padding(
-                              padding:  EdgeInsets.only(right: 35.0,left: 35.0,top: 7.0,bottom: 7.0),
-                              child:  Text('Add To Cart',style: TextStyle(color: defaultColor),),
+                              padding: EdgeInsets.only(
+                                  right: 35.0,
+                                  left: 35.0,
+                                  top: 7.0,
+                                  bottom: 7.0),
+                              child: Text(
+                                'Add To Cart',
+                                style: TextStyle(color: defaultColor),
+                              ),
                             ),
                           ),
                         ],
                       ),
-
                     ],
                   ),
                   Container(
@@ -248,12 +256,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         2.0,
                       ),
                     ),
-                    padding: const EdgeInsets.all(
-                        4.0
-                    ),
+                    padding: const EdgeInsets.all(4.0),
                     child: Text(
                       'DISCOUNT'.tr(),
-                      style: const TextStyle(fontSize: 9.0, color: Colors.white),
+                      style:
+                          const TextStyle(fontSize: 9.0, color: Colors.white),
                     ),
                   ),
                 ],
@@ -279,7 +286,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           ClipRRect(
                             borderRadius: BorderRadius.circular(12.0),
                             child: CachedNetworkImage(
-                              imageUrl: 'https://firebasestorage.googleapis.com/v0/b/flutterecom-b7f81.appspot.com/o/newDesign%2F6154tUlFvPL._AC_SL1500_.jpg?alt=media&token=6c7ae296-111d-49dd-8736-f57d312ac786',
+                              imageUrl:
+                                  'https://firebasestorage.googleapis.com/v0/b/flutterecom-b7f81.appspot.com/o/newDesign%2F6154tUlFvPL._AC_SL1500_.jpg?alt=media&token=6c7ae296-111d-49dd-8736-f57d312ac786',
                               height: 100.0,
                               width: 100.0,
                             ),
@@ -289,12 +297,11 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           const Expanded(
                               child: Text(
-                                'ALFA Furnishing Ergonomic Desk Chair ALFA Furnishing Ergonomic Desk Chair',
-                                maxLines: 3,
-                                style: TextStyle(fontSize: 12.0),
-                                overflow: TextOverflow.ellipsis,
-                              )
-                          ),
+                            'ALFA Furnishing Ergonomic Desk Chair ALFA Furnishing Ergonomic Desk Chair',
+                            maxLines: 3,
+                            style: TextStyle(fontSize: 12.0),
+                            overflow: TextOverflow.ellipsis,
+                          )),
                         ],
                       ),
                       Column(
@@ -302,20 +309,27 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.end,
-                            children: const[
-                              Text("96.00 EGP",style: TextStyle(
-                                fontSize: 12.0,
-                                color: Colors.grey,
-                                decoration: TextDecoration.lineThrough,
-                              ),),
-                              SizedBox(width: 5.0,),
-                              Text("80.00 EGP",style: TextStyle(color: defaultColor),),
+                            children: const [
+                              Text(
+                                "96.00 EGP",
+                                style: TextStyle(
+                                  fontSize: 12.0,
+                                  color: Colors.grey,
+                                  decoration: TextDecoration.lineThrough,
+                                ),
+                              ),
+                              SizedBox(
+                                width: 5.0,
+                              ),
+                              Text(
+                                "80.00 EGP",
+                                style: TextStyle(color: defaultColor),
+                              ),
                             ],
                           ),
                           const AddToCartBTN(),
                         ],
                       ),
-
                     ],
                   ),
                   Container(
@@ -325,12 +339,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         2.0,
                       ),
                     ),
-                    padding: const EdgeInsets.all(
-                        4.0
-                    ),
+                    padding: const EdgeInsets.all(4.0),
                     child: Text(
                       'DISCOUNT'.tr(),
-                      style: const TextStyle(fontSize: 9.0, color: Colors.white),
+                      style:
+                          const TextStyle(fontSize: 9.0, color: Colors.white),
                     ),
                   ),
                 ],
@@ -356,7 +369,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           ClipRRect(
                             borderRadius: BorderRadius.circular(12.0),
                             child: CachedNetworkImage(
-                              imageUrl: 'https://firebasestorage.googleapis.com/v0/b/flutterecom-b7f81.appspot.com/o/newDesign%2F61ia%2BclFWeL._AC_SL1500_.jpg?alt=media&token=708295e3-8284-4306-a8b6-103f43d2e912',
+                              imageUrl:
+                                  'https://firebasestorage.googleapis.com/v0/b/flutterecom-b7f81.appspot.com/o/newDesign%2F61ia%2BclFWeL._AC_SL1500_.jpg?alt=media&token=708295e3-8284-4306-a8b6-103f43d2e912',
                               height: 100.0,
                               width: 100.0,
                             ),
@@ -366,12 +380,11 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           const Expanded(
                               child: Text(
-                                'ALFA Furnishing Ergonomic Desk Chair ALFA Furnishing Ergonomic Desk Chair',
-                                maxLines: 3,
-                                style: TextStyle(fontSize: 12.0),
-                                overflow: TextOverflow.ellipsis,
-                              )
-                          ),
+                            'ALFA Furnishing Ergonomic Desk Chair ALFA Furnishing Ergonomic Desk Chair',
+                            maxLines: 3,
+                            style: TextStyle(fontSize: 12.0),
+                            overflow: TextOverflow.ellipsis,
+                          )),
                         ],
                       ),
                       Column(
@@ -379,14 +392,22 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.end,
-                            children: const[
-                              Text("96.00 EGP",style: TextStyle(
-                                fontSize: 12.0,
-                                color: Colors.grey,
-                                decoration: TextDecoration.lineThrough,
-                              ),),
-                              SizedBox(width: 5.0,),
-                              Text("80.00 EGP",style: TextStyle(color: defaultColor),),
+                            children: const [
+                              Text(
+                                "96.00 EGP",
+                                style: TextStyle(
+                                  fontSize: 12.0,
+                                  color: Colors.grey,
+                                  decoration: TextDecoration.lineThrough,
+                                ),
+                              ),
+                              SizedBox(
+                                width: 5.0,
+                              ),
+                              Text(
+                                "80.00 EGP",
+                                style: TextStyle(color: defaultColor),
+                              ),
                             ],
                           ),
                           Container(
@@ -395,18 +416,23 @@ class _HomeScreenState extends State<HomeScreen> {
                                 color: defaultColor,
                                 width: 1.5,
                               ),
-                              borderRadius: const BorderRadius.all(
-                                  Radius.circular(10.0)
-                              ),
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(10.0)),
                             ),
                             child: const Padding(
-                              padding:  EdgeInsets.only(right: 35.0,left: 35.0,top: 7.0,bottom: 7.0),
-                              child:  Text('Add To Cart',style: TextStyle(color: defaultColor),),
+                              padding: EdgeInsets.only(
+                                  right: 35.0,
+                                  left: 35.0,
+                                  top: 7.0,
+                                  bottom: 7.0),
+                              child: Text(
+                                'Add To Cart',
+                                style: TextStyle(color: defaultColor),
+                              ),
                             ),
                           ),
                         ],
                       ),
-
                     ],
                   ),
                   Container(
@@ -416,12 +442,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         2.0,
                       ),
                     ),
-                    padding: const EdgeInsets.all(
-                        4.0
-                    ),
+                    padding: const EdgeInsets.all(4.0),
                     child: Text(
                       'DISCOUNT'.tr(),
-                      style: const TextStyle(fontSize: 9.0, color: Colors.white),
+                      style:
+                          const TextStyle(fontSize: 9.0, color: Colors.white),
                     ),
                   ),
                 ],
@@ -447,7 +472,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           ClipRRect(
                             borderRadius: BorderRadius.circular(12.0),
                             child: CachedNetworkImage(
-                              imageUrl: 'https://firebasestorage.googleapis.com/v0/b/flutterecom-b7f81.appspot.com/o/newDesign%2F61ia%2BclFWeL._AC_SL1500_.jpg?alt=media&token=708295e3-8284-4306-a8b6-103f43d2e912',
+                              imageUrl:
+                                  'https://firebasestorage.googleapis.com/v0/b/flutterecom-b7f81.appspot.com/o/newDesign%2F61ia%2BclFWeL._AC_SL1500_.jpg?alt=media&token=708295e3-8284-4306-a8b6-103f43d2e912',
                               height: 100.0,
                               width: 100.0,
                             ),
@@ -457,12 +483,11 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           const Expanded(
                               child: Text(
-                                'ALFA Furnishing Ergonomic Desk Chair ALFA Furnishing Ergonomic Desk Chair',
-                                maxLines: 3,
-                                style: TextStyle(fontSize: 12.0),
-                                overflow: TextOverflow.ellipsis,
-                              )
-                          ),
+                            'ALFA Furnishing Ergonomic Desk Chair ALFA Furnishing Ergonomic Desk Chair',
+                            maxLines: 3,
+                            style: TextStyle(fontSize: 12.0),
+                            overflow: TextOverflow.ellipsis,
+                          )),
                         ],
                       ),
                       Column(
@@ -470,14 +495,22 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.end,
-                            children: const[
-                              Text("96.00 EGP",style: TextStyle(
-                                fontSize: 12.0,
-                                color: Colors.grey,
-                                decoration: TextDecoration.lineThrough,
-                              ),),
-                              SizedBox(width: 5.0,),
-                              Text("80.00 EGP",style: TextStyle(color: defaultColor),),
+                            children: const [
+                              Text(
+                                "96.00 EGP",
+                                style: TextStyle(
+                                  fontSize: 12.0,
+                                  color: Colors.grey,
+                                  decoration: TextDecoration.lineThrough,
+                                ),
+                              ),
+                              SizedBox(
+                                width: 5.0,
+                              ),
+                              Text(
+                                "80.00 EGP",
+                                style: TextStyle(color: defaultColor),
+                              ),
                             ],
                           ),
                           Container(
@@ -486,18 +519,23 @@ class _HomeScreenState extends State<HomeScreen> {
                                 color: defaultColor,
                                 width: 1.5,
                               ),
-                              borderRadius: const BorderRadius.all(
-                                  Radius.circular(10.0)
-                              ),
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(10.0)),
                             ),
                             child: const Padding(
-                              padding:  EdgeInsets.only(right: 35.0,left: 35.0,top: 7.0,bottom: 7.0),
-                              child:  Text('Add To Cart',style: TextStyle(color: defaultColor),),
+                              padding: EdgeInsets.only(
+                                  right: 35.0,
+                                  left: 35.0,
+                                  top: 7.0,
+                                  bottom: 7.0),
+                              child: Text(
+                                'Add To Cart',
+                                style: TextStyle(color: defaultColor),
+                              ),
                             ),
                           ),
                         ],
                       ),
-
                     ],
                   ),
                   Container(
@@ -507,12 +545,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         2.0,
                       ),
                     ),
-                    padding: const EdgeInsets.all(
-                        4.0
-                    ),
+                    padding: const EdgeInsets.all(4.0),
                     child: Text(
                       'DISCOUNT'.tr(),
-                      style: const TextStyle(fontSize: 9.0, color: Colors.white),
+                      style:
+                          const TextStyle(fontSize: 9.0, color: Colors.white),
                     ),
                   ),
                 ],
@@ -524,6 +561,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+
 class OfferMode {
   late String id;
   late String image;
@@ -531,4 +569,3 @@ class OfferMode {
 
   OfferMode(this.id, this.image, this.title);
 }
-

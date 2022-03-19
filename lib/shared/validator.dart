@@ -1,23 +1,23 @@
-import 'package:easy_localization/src/public_ext.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class Validator {
   static String? validateName(String? value) {
-    if(value!.isEmpty || value.length < 5){
+    if (value!.isEmpty || value.length < 5) {
       return 'enter_name_ver'.tr();
     }
     return null;
   }
+
   static String? validateEmpty(String? value) {
-    if(value!.isEmpty){
+    if (value!.isEmpty) {
       return "Can't be empty";
     }
     return null;
   }
 
-
   static String? validateMobile(String? value) {
     String pattern = r'(^[0-9]*$)';
-    RegExp regExp =  RegExp(pattern);
+    RegExp regExp = RegExp(pattern);
     if (value!.isEmpty) {
       return "Mobile is Required";
     } else if (value.length != 10) {
@@ -28,19 +28,19 @@ class Validator {
     return null;
   }
 
-  static String? validatePassword(String? value){
-    if(value!.isEmpty){
+  static String? validatePassword(String? value) {
+    if (value!.isEmpty) {
       return 'password_ver'.tr();
-    } else if (value.length < 6){
+    } else if (value.length < 6) {
       return 'password_ver'.tr();
     }
     return null;
   }
 
-  static String? validatePhone(String? value){
-    if(value!.isEmpty){
+  static String? validatePhone(String? value) {
+    if (value!.isEmpty) {
       return 'enterPhoneVer'.tr();
-    } else if (value.length < 10){
+    } else if (value.length < 10) {
       return 'enterPhoneVer'.tr();
     }
     return null;
@@ -49,7 +49,7 @@ class Validator {
   static String? validateEmail(String? value) {
     String pattern =
         r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-    RegExp regExp =  RegExp(pattern);
+    RegExp regExp = RegExp(pattern);
     if (value!.isEmpty) {
       return 'enter_ver'.tr();
     } else if (!regExp.hasMatch(value)) {
@@ -62,25 +62,21 @@ class Validator {
   static String? validateEmailCorrect(String? value) {
     String pattern =
         r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-    RegExp regExp =  RegExp(pattern);
-    if (value!.isEmpty){
+    RegExp regExp = RegExp(pattern);
+    if (value!.isEmpty) {
       return null;
-    }
-    else {
+    } else {
       if (!regExp.hasMatch(value)) {
         return 'enter_ver_invalid'.tr();
       }
     }
-
+    return null;
   }
 
-  static String? validateAddress(String? value){
-    if(value!.isEmpty || value.length < 5){
+  static String? validateAddress(String? value) {
+    if (value!.isEmpty || value.length < 5) {
       return 'enter_address_ver'.tr();
     }
     return null;
   }
-
-
-
 }

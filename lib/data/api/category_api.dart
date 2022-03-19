@@ -11,11 +11,11 @@ class CategoryApi {
           .collection(CATEGORIES_COLLECTION)
           .get()
           .then((value) {
-        value.docs.forEach((element) {
+        for (var element in value.docs) {
           var categoryModel = CategoriesModel.fromJson(element.data());
           categoryModel.menu_id = element.id;
           categoryList.add(categoryModel);
-        });
+        }
         return categoryList;
       }).catchError((onError) {
         throw (onError.toString()); // error thrown

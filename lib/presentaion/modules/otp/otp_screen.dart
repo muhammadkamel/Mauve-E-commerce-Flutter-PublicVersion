@@ -1,29 +1,29 @@
-import 'dart:math';
-
-import 'package:easy_localization/src/public_ext.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterecom/cubit/auth/auth_cubit.dart';
 import 'package:flutterecom/cubit/auth/auth_state.dart';
-import 'package:flutterecom/presentaion/modules/register/register_screen.dart';
 import 'package:flutterecom/shared/commponents/commopnents.dart';
-import 'package:flutterecom/shared/constants/constants.dart';
 import 'package:flutterecom/shared/style/colors.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
-class OtpScreen extends StatelessWidget {
+class OtpScreen extends StatefulWidget {
   final String phoneNumber;
 
-  OtpScreen({Key? key, required this.phoneNumber}) : super(key: key);
+  const OtpScreen({Key? key, required this.phoneNumber}) : super(key: key);
 
+  @override
+  State<OtpScreen> createState() => _OtpScreenState();
+}
+
+class _OtpScreenState extends State<OtpScreen> {
   late String otpCode;
 
   Widget _buildIntroTexts() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-         Text(
+        Text(
           'verity_phone_txt'.tr(),
           style: const TextStyle(
               color: Colors.black, fontSize: 24, fontWeight: FontWeight.bold),
@@ -40,7 +40,7 @@ class OtpScreen extends StatelessWidget {
                   color: Colors.black, fontSize: 18, height: 1.4),
               children: <TextSpan>[
                 TextSpan(
-                  text: phoneNumber,
+                  text: widget.phoneNumber,
                   style: const TextStyle(color: defaultColor),
                 ),
               ],
@@ -96,11 +96,12 @@ class OtpScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<AuthCubit, AuthStates>(
       listener: (context, state) {
-        if (state is ShopLoginLoadingDoneTypeOTB){
-          AuthCubit.get(context).checkUserExistInDatabase(uid: state.uId,phone: state.phone, email: state.email);
+        if (state is ShopLoginLoadingDoneTypeOTB) {
+          AuthCubit.get(context).checkUserExistInDatabase(
+              uid: state.uId, phone: state.phone, email: state.email);
         }
       },
-      builder: (context,state){
+      builder: (context, state) {
         return SafeArea(
           child: Scaffold(
             backgroundColor: Colors.white,
@@ -108,10 +109,12 @@ class OtpScreen extends StatelessWidget {
               child: Center(
                 child: Container(
                   margin:
-                  const EdgeInsets.symmetric(horizontal: 32, vertical: 88),
+                      const EdgeInsets.symmetric(horizontal: 32, vertical: 88),
                   child: Column(
                     children: [
-                     state is  SubmitOptLoading ?  defaultLinearProgressIndicator() :  Container(),
+                      state is SubmitOptLoading
+                          ? defaultLinearProgressIndicator()
+                          : Container(),
                       _buildIntroTexts(),
                       const SizedBox(
                         height: 88,
@@ -125,7 +128,6 @@ class OtpScreen extends StatelessWidget {
           ),
         );
       },
-
     );
   }
 }

@@ -12,42 +12,34 @@ const String productDetailsPath = '/product_details';
 const String cartPath = '/cart';
 const String contactPath = '/contact';
 
-
 const String userAddressPath = '/user_address';
 const String chatPath = '/chat';
 const String otpPath = '/otp';
 
-
-
 //final navigatorKey = GlobalKey<NavigatorState>();
 
+const String USER_COLLECTION = 'Users';
+const String TOKEN_COLLECTION = 'Tokens';
 
+const String OFFERS_COLLECTION = 'Offers';
+const String OFFERS_OFFERLIST_COLLECTION = 'offerList';
 
-final String USER_COLLECTION ='Users';
-final String TOKEN_COLLECTION ='Tokens';
+const String CATEGORIES_COLLECTION = 'Categories';
+const String PRODUCTS_COLLECTION = 'products';
+const String RATES_COLLECTION = 'rates';
+const String ORDERS_COLLECTION = 'Orders';
+const String SHIPPER_ORDERS_COLLECTION = 'ShippingOrder';
+const String INFO_COLLECTION = 'Info';
+const String PROMOS_COLLECTION = 'Promos';
+const String INVITAIONSCODES_COLLECTION = 'InvitationsCodes';
+const String MESSAGES_COLLECTION = 'Messages';
 
-final String OFFERS_COLLECTION ='Offers';
-final String OFFERS_OFFERLIST_COLLECTION ='offerList';
+const String CHAT_REF = "Chat";
+const String KEY_ROOM_ID = "CHAT_ROOM_ID";
+const String KEY_CHAT_USER = "CHAT_SENDER";
+const String CAHT_DETAIL_REF = "ChatDetail";
 
-
-
-final String CATEGORIES_COLLECTION ='Categories';
-final String PRODUCTS_COLLECTION ='products';
-final String RATES_COLLECTION ='rates';
-final String ORDERS_COLLECTION ='Orders';
-final String SHIPPER_ORDERS_COLLECTION ='ShippingOrder';
-final String INFO_COLLECTION ='Info';
-final String PROMOS_COLLECTION ='Promos';
-final String INVITAIONSCODES_COLLECTION ='InvitationsCodes';
-final String MESSAGES_COLLECTION ='Messages';
-
-final String CHAT_REF = "Chat";
-final String KEY_ROOM_ID = "CHAT_ROOM_ID";
-final String KEY_CHAT_USER = "CHAT_SENDER";
-final String CAHT_DETAIL_REF = "ChatDetail";
-
-
-final String GOOGLE_MAP_API_KEY = 'AIzaSyDO4rN4fQCdQSpsKLDvCs_Vbn6RoYkeEfU';
+const String GOOGLE_MAP_API_KEY = 'AIzaSyDO4rN4fQCdQSpsKLDvCs_Vbn6RoYkeEfU';
 
 class Boxes {
   static Box<Employee> getEmployees() => Hive.box<Employee>('employee');

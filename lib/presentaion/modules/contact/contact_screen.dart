@@ -1,5 +1,4 @@
-import 'package:easy_localization/src/public_ext.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterecom/cubit/auth/auth_cubit.dart';
@@ -15,7 +14,7 @@ import 'package:flutterecom/shared/validator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class ContactScreen extends StatefulWidget {
-  ContactScreen({Key? key}) : super(key: key);
+  const ContactScreen({Key? key}) : super(key: key);
 
   @override
   State<ContactScreen> createState() => _ContactScreenState();
@@ -36,7 +35,6 @@ class _ContactScreenState extends State<ContactScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     nameController.text = AuthCubit.get(context).userModel.name;
     phoneController.text = AuthCubit.get(context).userModel.phone;
@@ -49,7 +47,6 @@ class _ContactScreenState extends State<ContactScreen> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     nameController.dispose();
     phoneController.dispose();
@@ -156,7 +153,10 @@ class _ContactScreenState extends State<ContactScreen> {
                   ),
                   ExpansionTile(
                     tilePadding: const EdgeInsets.all(0.0),
-                    title:  const Text('Hotlines',style: TextStyle(fontSize: 14.0),),
+                    title: const Text(
+                      'Hotlines',
+                      style: TextStyle(fontSize: 14.0),
+                    ),
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -169,7 +169,7 @@ class _ContactScreenState extends State<ContactScreen> {
                               decoration: const BoxDecoration(
                                 color: MyColors.scaffoldBackgroundColorMain,
                                 borderRadius:
-                                BorderRadius.all(Radius.circular(10.0)),
+                                    BorderRadius.all(Radius.circular(10.0)),
                               ),
                               child: Padding(
                                 padding: const EdgeInsets.all(5.0),
@@ -192,7 +192,7 @@ class _ContactScreenState extends State<ContactScreen> {
                                             fontSize: 14.0,
                                             fontWeight: FontWeight.normal,
                                             color:
-                                            Colors.black.withOpacity(0.6),
+                                                Colors.black.withOpacity(0.6),
                                           ),
                                         ),
                                       ],
@@ -221,7 +221,7 @@ class _ContactScreenState extends State<ContactScreen> {
                               decoration: const BoxDecoration(
                                 color: MyColors.scaffoldBackgroundColorMain,
                                 borderRadius:
-                                BorderRadius.all(Radius.circular(10.0)),
+                                    BorderRadius.all(Radius.circular(10.0)),
                               ),
                               child: Padding(
                                 padding: const EdgeInsets.all(5.0),
@@ -240,7 +240,7 @@ class _ContactScreenState extends State<ContactScreen> {
                                             fontSize: 14.0,
                                             fontWeight: FontWeight.normal,
                                             color:
-                                            Colors.black.withOpacity(0.6),
+                                                Colors.black.withOpacity(0.6),
                                           ),
                                         ),
                                       ],
@@ -268,7 +268,10 @@ class _ContactScreenState extends State<ContactScreen> {
                   const SizedBox(
                     height: 20.0,
                   ),
-                  const Text('You Can find Us',style: TextStyle(fontSize: 14.0),),
+                  const Text(
+                    'You Can find Us',
+                    style: TextStyle(fontSize: 14.0),
+                  ),
                   const SizedBox(
                     height: 15.0,
                   ),

@@ -1,6 +1,5 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
-import 'package:easy_localization/src/public_ext.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterecom/cubit/auth/auth_cubit.dart';
@@ -14,8 +13,7 @@ import 'package:flutterecom/shared/style/colors.dart';
 import 'package:flutterecom/shared/style/icon_broken.dart';
 
 class ChatScreen extends StatefulWidget {
-
-  ChatScreen({Key? key}) : super(key: key);
+  const ChatScreen({Key? key}) : super(key: key);
 
   @override
   State<ChatScreen> createState() => _ChatScreenState();
@@ -27,24 +25,24 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     ChatCubit.get(context).getMessages();
   }
+
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     messageController.dispose();
     _controller.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-          titleSpacing: 0.0,
-          title: const Text('Mohamed, Customer Services'),
+        titleSpacing: 0.0,
+        title: const Text('Mohamed, Customer Services'),
         leading: IconButton(
           icon: Icon(
             context.locale.toString() == 'en_EN'
@@ -57,53 +55,61 @@ class _ChatScreenState extends State<ChatScreen> {
         ),
       ),
       body: BlocConsumer<ChatCubit, ChatState>(
-        listener: (context,state){
-          if(state is ChatSendMessageSuccessState){
-            messageController.text ='';
+        listener: (context, state) {
+          if (state is ChatSendMessageSuccessState) {
+            messageController.text = '';
           }
         },
-        builder: (context,state){
-        /*  if (_controller.hasClients){
+        builder: (context, state) {
+          /*  if (_controller.hasClients){
             _controller.animateTo(_controller.position.maxScrollExtent, duration: const Duration(milliseconds: 500), curve: Curves.easeOut);
           }*/
-            return ConditionalBuilder(
-            condition: ChatCubit.get(context).messages!=null,
-            builder: (BuildContext context)
-            {
+          return ConditionalBuilder(
+            condition: ChatCubit.get(context).messages != null,
+            builder: (BuildContext context) {
               return Padding(
                 padding: const EdgeInsets.all(18.0),
                 child: Column(
-                  children:
-                  [
+                  children: [
                     Expanded(
                       child: ListView.separated(
                         controller: _controller,
                         reverse: true,
                         physics: const BouncingScrollPhysics(),
-                        itemBuilder: (context,index)
-                        {
-                          final reversedIndex = ChatCubit.get(context).messages!.length - 1 - index;
-                          final item = ChatCubit.get(context).messages![reversedIndex];
+                        itemBuilder: (context, index) {
+                          final reversedIndex =
+                              ChatCubit.get(context).messages!.length -
+                                  1 -
+                                  index;
+                          final item =
+                              ChatCubit.get(context).messages![reversedIndex];
 
                           ChatMsgModel message = item;
 
-                          if(CacheHelper.getString(key: 'uId') == message.uid) {
+                          if (CacheHelper.getString(key: 'uId') ==
+                              message.uid) {
                             return MyChatMsgItem(chatMsgModel: message);
                           }
                           return AdminChatMsgItem(chatMsgModel: message);
                         },
-                        separatorBuilder: (context,index) => const SizedBox(height: 15.0,),
+                        separatorBuilder: (context, index) => const SizedBox(
+                          height: 15.0,
+                        ),
                         itemCount: ChatCubit.get(context).messages!.length,
                       ),
                     ),
-                    const SizedBox(height: 15.0,),
+                    const SizedBox(
+                      height: 15.0,
+                    ),
                     Container(
                       decoration: BoxDecoration(
                         border: Border.all(
                           color: MyColors.iconsBgColor,
                           width: 1.0,
                         ),
-                        borderRadius: BorderRadius.circular(15.0,),
+                        borderRadius: BorderRadius.circular(
+                          15.0,
+                        ),
                       ),
                       clipBehavior: Clip.antiAliasWithSaveLayer,
                       child: Row(
@@ -111,7 +117,8 @@ class _ChatScreenState extends State<ChatScreen> {
                           Expanded(
                             child: Padding(
                               padding: const EdgeInsetsDirectional.only(
-                                start: 7.0,),
+                                start: 7.0,
+                              ),
                               child: TextFormField(
                                 controller: messageController,
                                 decoration: const InputDecoration(
@@ -124,19 +131,20 @@ class _ChatScreenState extends State<ChatScreen> {
                             height: 48.0,
                             decoration: const BoxDecoration(
                               color: defaultColor,
-                              borderRadius:BorderRadius.all( Radius.circular(5.0,)),
+                              borderRadius: BorderRadius.all(Radius.circular(
+                                5.0,
+                              )),
                             ),
                             child: MaterialButton(
-                              onPressed: ()
-                              {
-                                if(messageController.text.isNotEmpty){
-                                  ChatCubit.get(context).sendMsg
-                                    (
-                                    dateTime: DateTime.now().millisecondsSinceEpoch,
-                                    content: messageController.text, name: AuthCubit.get(context).userModel.name,
+                              onPressed: () {
+                                if (messageController.text.isNotEmpty) {
+                                  ChatCubit.get(context).sendMsg(
+                                    dateTime:
+                                        DateTime.now().millisecondsSinceEpoch,
+                                    content: messageController.text,
+                                    name: AuthCubit.get(context).userModel.name,
                                   );
                                 }
-
                               },
                               minWidth: 1.0,
                               child: const Icon(
@@ -153,8 +161,8 @@ class _ChatScreenState extends State<ChatScreen> {
                 ),
               );
             },
-            fallback:(context) => const Center(child: CircularProgressIndicator()),
-
+            fallback: (context) =>
+                const Center(child: CircularProgressIndicator()),
           );
         },
       ),
